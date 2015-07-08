@@ -1,0 +1,8 @@
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+
+.col-xs-6 img{ max-width:700px; width:100%;}
+@media (max-width: 768px) {.col-xs-6 { display:block; clear:both; width:100%;}} 
+div.item{ background-color:#e7e7e7; padding:30px 20px; margin-bottom:30px;}
