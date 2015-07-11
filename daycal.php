@@ -1,10 +1,4 @@
-<?php session_start();
-
-?>
-
-<!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
+<?php include 'head.php'; ?>
 <link href="http://fullcalendar.io/js/fullcalendar-2.3.1/fullcalendar.css" rel="stylesheet">
 <link href="http://fullcalendar.io/js/fullcalendar-2.3.1/fullcalendar.print.css" rel="stylesheet" media="print">
 <link href="css/fullcalendar.css" rel="stylesheet">
@@ -119,6 +113,10 @@ function checkAvailability($date){
 ?>
 </head>
 <body>
+
+<?php include('fixed-nav.php'); ?>
+
+
 	<div id="wrap">
 
 		<div id="external-events">
@@ -153,5 +151,6 @@ function checkAvailability($date){
 		</form>
 	</div>
 <!-- FORM Ends Here -->
+
 </body>
 </html>

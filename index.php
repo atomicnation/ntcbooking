@@ -1,10 +1,8 @@
-<?php session_start(); ?>
-<!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
+<?php include ('head.php') ?>
 <link href="http://fullcalendar.io/js/fullcalendar-2.3.1/fullcalendar.css" rel="stylesheet">
 <link href="http://fullcalendar.io/js/fullcalendar-2.3.1/fullcalendar.print.css" rel="stylesheet" media="print">
 <link href="css/fullcalendar.css" rel="stylesheet">
+<link href="css/fullcalendar-ext.css" rel="stylesheet">
 <script src="fullcalendar/moment.min.js"></script>
 <script src="fullcalendar/jquery.min.js"></script>
 <script src="fullcalendar/jquery-ui.custom.min.js"></script>
@@ -37,9 +35,9 @@ $(document).ready(function() {
 			//OPTIONS------------------------------------------
 		//Define header settings
 		header : {
-		left : 'prevYear,prev,next,nextYear today',
-		center : 'title',
-		right : 'month,agendaWeek,agendaDay'
+			left : 'prevYear,prev,next,nextYear today',
+			center : 'title',
+			right : 'month,agendaWeek,agendaDay'
 		},
 		//Define starting and ending hour visible in calendar
 		minTime: "09:00:00",
@@ -55,80 +53,48 @@ $(document).ready(function() {
 			var dateSend = date.format("YYYY/MM/DD");
 			document.location.href = 'daycal.php?q='+dateSend;
 			//sendData(moment);
-		}
+		},
+		
+		events: 'events.php'
+		/*[
+		
+		
+			{
+				title  : 'event 1',
+				start  : '2015-07-06'
+			},
+			{
+				title  : 'event 2',
+				start  : '2015-07-11T12:00:00',
+				end  : '2015-07-11T13:00:00',
+				allDay : false // will make the time show
+			},
+			{
+				title  : 'event 3',
+				start  : '2015-07-11T12:00:00',
+				end  : '2015-07-11T13:00:00',
+				allDay : false, // will make the time show
+				color: '#f0ad4e',
+				borderColor: '#eea236',
+				className: 'PEDRITO',
+				editable: true,
+				startEditable: true,
+				surationEditable:true
+			}
+			
+		]		*/
+		
 		
 	});
 
 });
 
 </script>
-<style>
-
-	body {
-		margin-top: 40px;
-		text-align: center;
-		font-size: 14px;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-	}
-		
-	#wrap {
-		width: 1100px;
-		margin: 0 auto;
-	}
-		
-	#external-events {
-		float: left;
-		width: 150px;
-		padding: 0 10px;
-		border: 1px solid #ccc;
-		background: #eee;
-		text-align: left;
-	}
-		
-	#external-events h4 {
-		font-size: 16px;
-		margin-top: 0;
-		padding-top: 1em;
-	}
-		
-	#external-events .fc-event {
-		margin: 10px 0;
-		cursor: pointer;
-	}
-		
-	#external-events p {
-		margin: 1.5em 0;
-		font-size: 11px;
-		color: #666;
-	}
-		
-	#external-events p input {
-		margin: 0;
-		vertical-align: middle;
-	}
-
-	#calendar {
-		float: right;
-		width: 900px;
-	}
-
-</style>
+<?php include ('fixed-nav.php') ?>
+<title>NTC Calendar</title>
 </head>
 <body>
 	<div id="wrap">
-
-		<div id="external-events">
-			<h4>Draggable Events</h4>
-			<div id="1" class="fc-event ui-draggable ui-draggable-handle">My Event 1</div>
-			<div id="2" class="fc-event ui-draggable ui-draggable-handle">My Event 2</div>
-			<div class="fc-event ui-draggable ui-draggable-handle">My Event 3</div>
-			<div class="fc-event ui-draggable ui-draggable-handle">My Event 4</div>
-			<div class="fc-event ui-draggable ui-draggable-handle">My Event 5</div>
-			<p>
-				<input type="checkbox" id="drop-remove">
-				<label for="drop-remove">remove after drop</label>
-			</p>
-		</div>
 
 		<div id="calendar" class="fc fc-ltr fc-unthemed"></div>
 		<div style="clear:both"></div>
@@ -136,4 +102,5 @@ $(document).ready(function() {
 	</div>
 
 
-</body></html>
+</body>
+</html>

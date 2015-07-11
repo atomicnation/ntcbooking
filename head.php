@@ -13,9 +13,9 @@
    <!-- LINKS -->
 	<link rel="icon" href="favicon.ico">
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"><!-- Better be included at the end -->
+	<!-- Custom styles for fixed nav bar -->
+    <link href="css/navbar-fixed-top.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
