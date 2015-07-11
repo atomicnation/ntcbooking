@@ -58,7 +58,6 @@ $(document).ready(function() {
 		events: 'events.php'
 		/*[
 		
-		
 			{
 				title  : 'event 1',
 				start  : '2015-07-06'
