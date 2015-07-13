@@ -1,13 +1,18 @@
 <?php include ('head.php') ?>
 <link href="fullcalendar/fullcalendar.css" rel="stylesheet">
-<link href="fullcalendar/fullcalendar-ext.css" rel="stylesheet">
+<link href="css/fullcalendar-ext.css" rel="stylesheet">
+<link href="css/form.css" rel="stylesheet">
+
 <script src="fullcalendar/moment.min.js"></script>
 <script src="fullcalendar/jquery.min.js"></script>
 <script src="fullcalendar/jquery-ui.custom.min.js"></script>
 <script src="fullcalendar/fullcalendar.min.js"></script>
+<!-- POPOUP SCRIPT -->
+<script src="js/form.js"></script>
 <script>
 
 $(document).ready(function() {
+	$('#popupForm').hide();
 
 	/* initialize the external events
 	-----------------------------------------------------------------*/
@@ -42,6 +47,11 @@ $(document).ready(function() {
 		maxTime: "21:00:00",
 		//Week starts on Monday
 		firstDay: 1,
+		//Events settings
+		defaultTimedEventDuration: '01:00:00',//Set Event default duration in 1h
+		eventColor: '#ff0000',
+		editable: true,
+		droppable: true, // this allows things to be dropped onto the calendar
 		
 		//CALLBACKS------------------------------------------
 		//Event when clicking over a day
@@ -55,9 +65,27 @@ $(document).ready(function() {
 				$('#calendar').fullCalendar('changeView', 'agendaDay');
 				$('#calendar').fullCalendar('gotoDate', date);
 			}
-			
+			if (view.name == 'agendaDay') {
+				//alert('Clicked on: ' + date.format("DD/MM/YYYY"));
+				$('#popupForm').show();
+				//php communication
+				//sendData(moment);
+			}
 			//document.location.href = 'daycal.php?q='+dateSend;
 			//sendData(moment);
+		},
+		
+		eventResizeStop: function( event, jsEvent, ui, view ) {
+			//alert('Clicked on: ' + date.format("DD/MM/YYYY"));
+			
+			var id = event.id;
+			//alert("Event ID: " + id);
+			/*var newEnd = event.end.format();
+			$("#start_time").val(date.format("DD/MM/YYYY HH:mm"));// hh will set 12h clock and HH 24h clock
+			$("#end_time").val(dEnd.format("DD/MM/YYYY HH:mm"));
+			*/
+			$('#popupForm').show();
+						
 		},
 		
 		events: 'events.php'
@@ -94,21 +122,6 @@ $(document).ready(function() {
 });
 
 </script>
-<style>
-
-	body {
-		margin: 70px 10px;
-		padding: 0;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		font-size: 14px;
-	}
-
-	#calendar {
-		max-width: 900px;
-		margin: 0 auto;
-	}
-
-</style>
 
 <?php include ('fixed-nav.php') ?>
 <title>NTC Calendar</title>
@@ -121,6 +134,24 @@ $(document).ready(function() {
 
 	</div>
 
+	<!-- Form -->
+	<div id="popupForm">
+		<form action="savebooking.php" id="form" method="post" name="form">
+			<img id="close" src="img/close.png" onclick ="div_hide()" />
+			<h2>New Booking</h2>
+			<hr />
+			<input id="item_id" name="item_id" type="hidden" value=""/>
+			<input id="start_time" name="start_time" type="hidden" value=""/>
+			<input id="end_time" name="end_time" type="hidden" value=""/>
+			<input id="name" name="name" placeholder="Name" type="text" />
+			<input id="last_name" name="last_name" placeholder="Last Name" type="text" />
+			<input id="email" name="email" placeholder="Email" type="text" />
+			<input id="phone" name="phone" placeholder="Phone Number" type="text" />
+			<textarea id="comments" name="comments" placeholder="Comments"></textarea>
+			<a href="javascript:%20check_empty()" onclick="div_hide()" id="submit" type="submit">Send</a>
+		</form>
+	</div>
+	<!-- FORM Ends Here -->
 
 </body>
 </html>

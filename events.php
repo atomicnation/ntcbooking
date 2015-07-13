@@ -40,7 +40,8 @@ for ($i=0; $i<$count; $i++) {
             'title' => $record[$i]['title'],
             'start' => $record[$i]['start_date'],
             'end' => $record[$i]['end_date'],
-            'allDay' => false
+            'allDay' => false,
+			'color' => "#2E8B57"
     );
 
 
