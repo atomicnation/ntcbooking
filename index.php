@@ -1,8 +1,6 @@
 <?php include ('head.php') ?>
-<link href="http://fullcalendar.io/js/fullcalendar-2.3.1/fullcalendar.css" rel="stylesheet">
-<link href="http://fullcalendar.io/js/fullcalendar-2.3.1/fullcalendar.print.css" rel="stylesheet" media="print">
-<link href="css/fullcalendar.css" rel="stylesheet">
-<link href="css/fullcalendar-ext.css" rel="stylesheet">
+<link href="fullcalendar/fullcalendar.css" rel="stylesheet">
+<link href="fullcalendar/fullcalendar-ext.css" rel="stylesheet">
 <script src="fullcalendar/moment.min.js"></script>
 <script src="fullcalendar/jquery.min.js"></script>
 <script src="fullcalendar/jquery-ui.custom.min.js"></script>
@@ -47,11 +45,18 @@ $(document).ready(function() {
 		
 		//CALLBACKS------------------------------------------
 		//Event when clicking over a day
-		dayClick: function(date, jsEvent, view) {
+		dayClick: function(date, jsEvent, month) {
 			var dateStr = date.format("DD/MM/YYYY");
-			alert('Clicked on: ' + dateStr );
+			//alert('Clicked on: ' + dateStr );
+			var view = $('#calendar').fullCalendar('getView');			
+			//alert(view.name);
 			var dateSend = date.format("YYYY/MM/DD");
-			document.location.href = 'daycal.php?q='+dateSend;
+			if (view.name == 'month' || view.name == 'agendaWeek' ){
+				$('#calendar').fullCalendar('changeView', 'agendaDay');
+				$('#calendar').fullCalendar('gotoDate', date);
+			}
+			
+			//document.location.href = 'daycal.php?q='+dateSend;
 			//sendData(moment);
 		},
 		
@@ -89,13 +94,29 @@ $(document).ready(function() {
 });
 
 </script>
+<style>
+
+	body {
+		margin: 70px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+</style>
+
 <?php include ('fixed-nav.php') ?>
 <title>NTC Calendar</title>
 </head>
 <body>
 	<div id="wrap">
 
-		<div id="calendar" class="fc fc-ltr fc-unthemed"></div>
+		<div id="calendar"></div>
 		<div style="clear:both"></div>
 
 	</div>
