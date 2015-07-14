@@ -15,5 +15,11 @@ document.getElementById('popupForm').style.display = "block";
 }
 //Function to Hide Popup
 function div_hide(){
-document.getElementById('popupForm').style.display = "none";
+	currentEvent.color = "#FF0000";
+	currentEvent.start = copyEvent.start ;
+	currentEvent.end = copyEvent.end;
+	
+	$('#calendar').fullCalendar('updateEvent', currentEvent);
+	document.getElementById('popupForm').style.display = "none";
+	// Launch 'revertFunc()' if the pop up has been launched by 'eventResize()'	
 }

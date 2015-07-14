@@ -10,7 +10,10 @@
 <!-- POPOUP SCRIPT -->
 <script src="js/form.js"></script>
 <script>
-
+var launchRev = false;
+var copyEvent;
+var currentEvent;
+var oldEnd;
 $(document).ready(function() {
 	$('#popupForm').hide();
 
@@ -45,11 +48,12 @@ $(document).ready(function() {
 		//Define starting and ending hour visible in calendar
 		minTime: "09:00:00",
 		maxTime: "21:00:00",
+		//Define time format
+		timeFormat: 'H:mm',
 		//Week starts on Monday
 		firstDay: 1,
 		//Events settings
 		defaultTimedEventDuration: '01:00:00',//Set Event default duration in 1h
-		eventColor: '#ff0000',
 		editable: true,
 		droppable: true, // this allows things to be dropped onto the calendar
 		
@@ -75,17 +79,27 @@ $(document).ready(function() {
 			//sendData(moment);
 		},
 		
+		eventResizeStart: function( event, jsEvent, ui, view ) {
+			copyEvent = {id:event.id, title:event.title, start:event.start,end:event.end, color:event.color};
+	
+		},
+		
 		eventResizeStop: function( event, jsEvent, ui, view ) {
 			//alert('Clicked on: ' + date.format("DD/MM/YYYY"));
-			
-			var id = event.id;
-			//alert("Event ID: " + id);
-			/*var newEnd = event.end.format();
-			$("#start_time").val(date.format("DD/MM/YYYY HH:mm"));// hh will set 12h clock and HH 24h clock
-			$("#end_time").val(dEnd.format("DD/MM/YYYY HH:mm"));
-			*/
+			currentEvent = event;
+			//alert("oldEnd = "+ copyEvent.end.format());
 			$('#popupForm').show();
-						
+		},
+		
+		eventDragStart: function( event, jsEvent, ui, view ) {
+			copyEvent = {id:event.id, title:event.title, start:event.start,end:event.end, color:event.color};
+	
+		},
+		
+		eventDrop: function( event, jsEvent, ui, view ) {
+			currentEvent = event;
+			var id = event.id;
+			$('#popupForm').show();
 		},
 		
 		events: 'events.php'
