@@ -17,7 +17,6 @@
 
     <div class="container">
 		
-		<!-- ELSE -->
 		<div class="row item">
 			<div class="col-xs-6"><img src="img/pitch.jpg" /></div>
 			<div class="col-xs-6">

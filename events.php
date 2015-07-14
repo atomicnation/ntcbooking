@@ -2,7 +2,7 @@
 include 'mysqlconn.php';
 
 $connexion = new mySqlX();
-$query = "SELECT res_id, start_time, end_time FROM reservation";
+$query = "SELECT * FROM reservation";
 $result = $connexion->selectDB($query);
 $count = 0;
 $record = array();
@@ -12,8 +12,8 @@ while($row = mysqli_fetch_array($result)){
 	*/
 	$record[$count]["id"] = $row[0];
 	$record[$count]["title"] = "Test ".$row[0];
-	$record[$count]["start_date"] = $row[1];
-	$record[$count]["end_date"]=$row[2];
+	$record[$count]["start_date"] = $row[2];
+	$record[$count]["end_date"]=$row[3];
 	$count++;
 }
 /*

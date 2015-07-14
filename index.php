@@ -48,6 +48,8 @@ $(document).ready(function() {
 		//Define starting and ending hour visible in calendar
 		minTime: "09:00:00",
 		maxTime: "21:00:00",
+		//Remove the All Day Event frame at the top of the day view
+		allDaySlot: false,
 		//Define time format
 		timeFormat: 'H:mm',
 		//Week starts on Monday
