@@ -1,4 +1,13 @@
-<?php include ('head.php') ?>
+<?php
+
+include ('head.php');
+include ('mysqlconn.php');
+$connexion = new mySqlX();
+$query = "SELECT * FROM item";
+$result = $connexion->selectDB($query);
+$r = array();
+
+?>
     
 	<!-- Custom styles for this template -->
     <link href="css/navbar-fixed-top.css" rel="stylesheet">
@@ -16,34 +25,19 @@
     <?php include('fixed-nav.php'); ?>
 
     <div class="container">
-		
-		<div class="row item">
-			<div class="col-xs-6"><img src="img/pitch.jpg" /></div>
-			<div class="col-xs-6">
-				<h2>Pitch 1</h2>
-				<p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-				<p>To see the difference between static and fixed top navbars, just scroll.</p>
-				<p>
-				  <a class="btn btn-lg btn-primary" href="#" role="button">Book it &raquo;</a>
-				</p>
+	
+		<?php foreach( $result as $row=>$key ): ?>
+				<div class="row item">
+				<div class="col-xs-6"><img src="<?= $key['item_image_url'] ?>" /></div>
+				<div class="col-xs-6">
+					<h2><?= $key['item_name'] ?></h2>
+					<p><?= $key['item_description'] ?></p>
+					<p>
+					  <a class="btn btn-lg btn-primary" href="#" role="button">Book it &raquo;</a>
+					</p>
+				</div>
 			</div>
-		</div>	
-		<!-- Main component for a primary marketing message or call to action -->
-		<div class="row item">
-			<div class="col-xs-6"><img src="img/pitch.jpg" /></div>
-			<div class="col-xs-6">
-				<h2>Pitch 2</h2>
-				<p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-				<p>To see the difference between static and fixed top navbars, just scroll.</p>
-				<p>
-				  <a class="btn btn-lg btn-primary" href="#" role="button">Book it &raquo;</a>
-				</p>
-			</div>
-		</div>
-
-    </div> <!-- /container -->
-
-
+		<?php endforeach ?>
     <?php include 'foot-scp.php'; ?>
   
 

@@ -10,10 +10,10 @@ while($row = mysqli_fetch_array($result)){
 	/*echo $row[0]. " - ". $row[1]. " - ".$row[2];
 	echo "<br>";
 	*/
-	$record[$count]["id"] = $row[0];
-	$record[$count]["title"] = "Test ".$row[0];
-	$record[$count]["start_date"] = $row[2];
-	$record[$count]["end_date"]=$row[3];
+	$record[$count]["id"] = $row["res_id"];
+	$record[$count]["title"] = "Test ".$row["res_id"]." - ".$row["name"];
+	$record[$count]["start_date"] = $row["start_time"];
+	$record[$count]["end_date"]=$row["end_time"];
 	$count++;
 }
 /*

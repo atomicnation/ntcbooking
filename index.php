@@ -15,7 +15,8 @@ var copyEvent;
 var currentEvent;
 var oldEnd;
 $(document).ready(function() {
-	$('#popupForm').hide();
+	$('#newEvForm').hide();
+	$('#editEvForm').hide();
 
 	/* initialize the external events
 	-----------------------------------------------------------------*/
@@ -38,7 +39,9 @@ $(document).ready(function() {
 		-----------------------------------------------------------------*/
 
 	$('#calendar').fullCalendar({
-			//OPTIONS------------------------------------------
+		//OPTIONS------------------------------------------
+		//Define time format
+		timeFormat: 'HH:mm',
 		//Define header settings
 		header : {
 			left : 'prevYear,prev,next,nextYear today',
@@ -50,8 +53,7 @@ $(document).ready(function() {
 		maxTime: "21:00:00",
 		//Remove the All Day Event frame at the top of the day view
 		allDaySlot: false,
-		//Define time format
-		timeFormat: 'H:mm',
+		
 		//Week starts on Monday
 		firstDay: 1,
 		//Events settings
@@ -73,7 +75,7 @@ $(document).ready(function() {
 			}
 			if (view.name == 'agendaDay') {
 				//alert('Clicked on: ' + date.format("DD/MM/YYYY"));
-				$('#popupForm').show();
+				$('#newEvForm').show();
 				//php communication
 				//sendData(moment);
 			}
@@ -89,8 +91,7 @@ $(document).ready(function() {
 		eventResizeStop: function( event, jsEvent, ui, view ) {
 			//alert('Clicked on: ' + date.format("DD/MM/YYYY"));
 			currentEvent = event;
-			//alert("oldEnd = "+ copyEvent.end.format());
-			$('#popupForm').show();
+			$('#editEvForm').show();
 		},
 		
 		eventDragStart: function( event, jsEvent, ui, view ) {
@@ -101,7 +102,7 @@ $(document).ready(function() {
 		eventDrop: function( event, jsEvent, ui, view ) {
 			currentEvent = event;
 			var id = event.id;
-			$('#popupForm').show();
+			$('#editEvForm').show();
 		},
 		
 		events: 'events.php'
@@ -151,20 +152,35 @@ $(document).ready(function() {
 	</div>
 
 	<!-- Form -->
-	<div id="popupForm">
-		<form action="savebooking.php" id="form" method="post" name="form">
-			<img id="close" src="img/close.png" onclick ="div_hide()" />
+	<div id="newEvForm" class="popupForm">
+		<form action="savebooking.php" id="newEvF" method="post" name="form">
+			<img id="close" src="img/close.png" onclick ="div_hide('newEvForm')" />
 			<h2>New Booking</h2>
 			<hr />
 			<input id="item_id" name="item_id" type="hidden" value=""/>
 			<input id="start_time" name="start_time" type="hidden" value=""/>
 			<input id="end_time" name="end_time" type="hidden" value=""/>
+			<input id="user_id" name="user_id" type="hidden" value=""/>
 			<input id="name" name="name" placeholder="Name" type="text" />
 			<input id="last_name" name="last_name" placeholder="Last Name" type="text" />
 			<input id="email" name="email" placeholder="Email" type="text" />
 			<input id="phone" name="phone" placeholder="Phone Number" type="text" />
 			<textarea id="comments" name="comments" placeholder="Comments"></textarea>
-			<a href="javascript:%20check_empty()" onclick="div_hide()" id="submit" type="submit">Send</a>
+			<a href="javascript:%20check_form('newEvForm')" onclick="div_hide('newEvForm')" id="submit" type="submit">Send</a>
+		</form>
+	</div>
+	<!-- FORM Ends Here -->
+	<!-- Form -->
+	<div id="editEvForm" class="popupForm">
+		<form action="" id="editEvF" method="post" name="form">
+			<img id="close" src="img/close.png" onclick ="div_hide('editEvForm')" />
+			<h2>Booking Edit</h2>
+			<hr />
+			<input id="item_id" name="item_id" type="hidden" value=""/>
+			<input id="start_time" name="start_time" type="hidden" value=""/>
+			<input id="end_time" name="end_time" type="hidden" value=""/>
+			<p>Close this form if you don't want to apply this changes over the booking</p>
+			<a href="javascript:%20check_form('editEvForm')" onclick="div_hide('editEvForm')" id="submit" type="submit">Send</a>
 		</form>
 	</div>
 	<!-- FORM Ends Here -->
