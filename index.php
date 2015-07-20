@@ -62,18 +62,25 @@ $(document).ready(function() {
 		//CALLBACKS------------------------------------------
 		//Event when clicking over a day
 		dayClick: function(date, jsEvent, month) {
-			var dateStr = date.format("DD/MM/YYYY");
+			var dateStr = date.toISOString();
 			//alert('Clicked on: ' + dateStr );
 			var view = $('#calendar').fullCalendar('getView');			
 			//alert(view.name);
-			var dateSend = date.format("YYYY/MM/DD");
+			var dateSend = date.toISOString();
 			if (view.name == 'month' || view.name == 'agendaWeek' ){
+				
 				$('#calendar').fullCalendar('changeView', 'agendaDay');
 				$('#calendar').fullCalendar('gotoDate', date);
 			}
 			if (view.name == 'agendaDay') {
 				//alert('Clicked on: ' + date.format("DD/MM/YYYY"));
+				$("#start_time").val(dateStr);
+				dateEnd = date.add(1, 'hours');
+				dateStr = dateEnd.toISOString();
+				$("#end_time").val(dateStr);
+				alert('Clicked on: ' + dateStr );
 				$('#newEvForm').show();
+				
 				//php communication
 				//sendData(moment);
 			}
