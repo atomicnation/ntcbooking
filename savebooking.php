@@ -16,7 +16,5 @@
 		$query = "INSERT INTO reservation (item_id, start_time, end_time, name, last_name, email, phone, comments)
 			VALUES('".$toins[0]."', '".$toins[1]."', '".$toins[2]."', '".$toins[3]."', '".$toins[4]."', '".$toins[5]."', '".$toins[6]."', '".$toins[7]."')";
 		$connexion->insertDB($query);
-		header("Location: daycal.php?q=".$_SESSION['datepicked']);
-		
 	}
 ?>

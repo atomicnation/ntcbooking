@@ -10,12 +10,15 @@ while($row = mysqli_fetch_array($result)){
 	/*echo $row[0]. " - ". $row[1]. " - ".$row[2];
 	echo "<br>";
 	*/
-	$record[$count]["id"] = $row["res_id"];
-	$record[$count]["title"] = "Test ".$row["res_id"]." - ".$row["name"];
-	$record[$count]["start_date"] = $row["start_time"];
-	$record[$count]["end_date"]=$row["end_time"];
-	$count++;
+	if(!empty($row["start_time"]) && !empty($row["end_time"])){ // Avoid crash when no date is introduced
+		$record[$count]["id"] = $row["res_id"];
+		$record[$count]["title"] = "Test ".$row["res_id"]." - ".$row["name"];
+		$record[$count]["start_date"] = $row["start_time"];
+		$record[$count]["end_date"]=$row["end_time"];
+		$count++;
+	} 
 }
+
 /*
 $record[0]["title"]="Test 1";
 $record[1]["title"]="Test 2";

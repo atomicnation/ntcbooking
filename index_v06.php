@@ -8,7 +8,7 @@
 <script src="fullcalendar/jquery-ui.custom.min.js"></script>
 <script src="fullcalendar/fullcalendar.min.js"></script>
 <!-- POPOUP SCRIPT -->
-<script src="js/form.js" type="text/javascript"></script>
+<script src="js/form.js"></script>
 <script>
 var launchRev = false;
 var copyEvent;
@@ -17,6 +17,7 @@ var oldEnd;
 $(document).ready(function() {
 	$('#newEvForm').hide();
 	$('#editEvForm').hide();
+
 	/* initialize the external events
 	-----------------------------------------------------------------*/
 	$('#external-events .fc-event').each(function() {
@@ -33,7 +34,8 @@ $(document).ready(function() {
 		});
 	});
 
-	/* initialize the calendar
+
+		/* initialize the calendar
 		-----------------------------------------------------------------*/
 
 	$('#calendar').fullCalendar({
@@ -133,12 +135,6 @@ $(document).ready(function() {
 		
 		
 	});
-	
-	$("#submit").on('click', function(){
-			//alert('button clicked');
-			check_form('newEvForm', 'newEvF');
-		}
-    );
 
 });
 
@@ -149,6 +145,7 @@ $(document).ready(function() {
 </head>
 <body>
 	<div id="wrap">
+
 		<div id="calendar"></div>
 		<div style="clear:both"></div>
 
@@ -165,15 +162,11 @@ $(document).ready(function() {
 			<input id="end_time" name="end_time" type="hidden" value=""/>
 			<input id="user_id" name="user_id" type="hidden" value=""/>
 			<input id="name" name="name" placeholder="Name" type="text" />
-			<p class='bg-danger'>Please introduce the name of the booker</p>
 			<input id="last_name" name="last_name" placeholder="Last Name" type="text" />
-			<p class='bg-danger'>Please introduce the last name of the booker</p>
 			<input id="email" name="email" placeholder="Email" type="text" />
-			<p class='bg-danger'>Please introduce a valid email address</p>
 			<input id="phone" name="phone" placeholder="Phone Number" type="text" />
-			<p class='bg-danger'>Please introduce a valid phone</p>
 			<textarea id="comments" name="comments" placeholder="Comments"></textarea>
-			<a href="#" id="submit" type="submit">Send</a>
+			<a href="javascript:%20check_form('newEvForm', 'newEvF')" id="submit" type="submit">Send</a>
 		</form>
 	</div>
 	<!-- FORM Ends Here -->
@@ -187,7 +180,7 @@ $(document).ready(function() {
 			<input id="start_time" name="start_time" type="hidden" value=""/>
 			<input id="end_time" name="end_time" type="hidden" value=""/>
 			<p>Close this form if you don't want to apply this changes over the booking</p>
-			<a href="javascript:%20check_form('editEvF')" onclick="div_hide('editEvForm')" id="submit2" type="submit">Send</a>
+			<a href="javascript:%20check_form('editEvF')" onclick="div_hide('editEvForm')" id="submit" type="submit">Send</a>
 		</form>
 	</div>
 	<!-- FORM Ends Here -->
