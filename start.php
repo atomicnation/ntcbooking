@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>NTC Booking</title>
+    
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,6 +22,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<title>NTC Booking</title>
   </head>
 
   <body>
@@ -37,7 +38,7 @@
               <h3 class="masthead-brand">NTC Booking</h3>
               <nav>
                 <ul class="nav masthead-nav">
-                  <li class="active"><a href="#">Home</a></li>
+                  <li class="active"><a href="index.php?q=start">Home</a></li>
                   <li><a href="facilities.php">Facilities</a></li>
                   <li><a href="signin.php">Login</a></li>
                 </ul>

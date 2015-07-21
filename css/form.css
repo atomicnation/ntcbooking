@@ -25,7 +25,8 @@ position:absolute;
 left:50%;
 top:17%;
 margin-left:-170px;
-font-family:'Raleway',sans-serif
+font-family:'Raleway',sans-serif;
+display:none;
 }
 form {
 min-width:250px;

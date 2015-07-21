@@ -13,8 +13,8 @@
         <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
           
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="start.php">Home</a></li>
-            <li class="active"><a href="facilities.php">Facilities</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li class="active"><a href="index.php?q=facilities">Facilities</a></li>
             <li><a href="signin.php">Login</a></li>
           </ul>
         </div><!--/.nav-collapse -->

@@ -1,163 +1,27 @@
-<?php include ('head.php') ?>
-<!-- FULLCALENDAR LINKS -->
-<link href="fullcalendar/fullcalendar.css" rel="stylesheet">
-<link href="css/fullcalendar-ext.css" rel="stylesheet">
-<!-- POPUPFORM LINKS -->
-<link href="css/form.css" rel="stylesheet">
-<!-- jQuery SCRIPTS -->
-<script src="js/jquery.min.js"></script>
-<script src="fullcalendar/jquery-ui.custom.min.js"></script>
-<!-- FULLCALENDAR SRIPTS -->
-<script src="fullcalendar/moment.min.js"></script>
-<script src="fullcalendar/fullcalendar.min.js"></script>
-<!-- POPOUP SCRIPT -->
-<script src="js/form.js" type="text/javascript"></script>
-<script>
-var launchRev = false;
-var copyEvent;
-var currentEvent;
-var oldEnd;
-$(document).ready(function() {
-	$('#newEvForm').hide();
-	$('#editEvForm').hide();
-	/* initialize the external events
-	-----------------------------------------------------------------*/
-	$('#external-events .fc-event').each(function() {
-		// store data so the calendar knows to render an event upon drop
-		$(this).data('event', {
-			title: $.trim($(this).text()), // use the element's text as the event title
-			stick: true // maintain when user navigates (see docs on the renderEvent method)
-		});
-		// make the event draggable using jQuery UI
-		$(this).draggable({
-			zIndex: 999,
-			revert: true,      // will cause the event to go back to its
-			revertDuration: 0  //  original position after the drag
-		});
-	});
+<?php
+$start; $facilities; $cal; $form;
+if(!isset($_GET['q']) || $_GET['q'] == 'start'){ 
+	$start = true;
+}
+elseif($_GET['q'] == 'cal'){
+	$cal = $form = true;
+	include ('fixed-nav.php');
+}
+elseif($_GET['q'] == 'facilities'){
+	$facilities = true;
+	include ('fixed-nav.php');
+	include ('mysqlconn.php');
+	$connexion = new mySqlX();
+	$query = "SELECT * FROM item";
+	$result = $connexion->selectDB($query);
+	$r = array();
+}
 
-	/* initialize the calendar
-		-----------------------------------------------------------------*/
+include ('headers.php'); 
 
-	$('#calendar').fullCalendar({
-		//OPTIONS------------------------------------------
-		//Define time format
-		timeFormat: 'HH:mm',
-		//Define header settings
-		header : {
-			left : 'prevYear,prev,next,nextYear today',
-			center : 'title',
-			right : 'month,agendaWeek,agendaDay'
-		},
-		//Define starting and ending hour visible in calendar
-		minTime: "09:00:00",
-		maxTime: "21:00:00",
-		//Remove the All Day Event frame at the top of the day view
-		allDaySlot: false,
-		
-		//Week starts on Monday
-		firstDay: 1,
-		//Events settings
-		defaultTimedEventDuration: '01:00:00',//Set Event default duration in 1h
-		editable: true,
-		droppable: true, // this allows things to be dropped onto the calendar
-		
-		//CALLBACKS------------------------------------------
-		//Event when clicking over a day
-		dayClick: function(date, jsEvent, month) {
-			var dateStr = date.toISOString();
-			//alert('Clicked on: ' + dateStr );
-			var view = $('#calendar').fullCalendar('getView');			
-			//alert(view.name);
-			var dateSend = date.toISOString();
-			if (view.name == 'month' || view.name == 'agendaWeek' ){
-				
-				$('#calendar').fullCalendar('changeView', 'agendaDay');
-				$('#calendar').fullCalendar('gotoDate', date);
-			}
-			if (view.name == 'agendaDay') {
-				//alert('Clicked on: ' + date.format("DD/MM/YYYY"));
-				$("#start_time").val(dateStr);
-				dateEnd = date.add(1, 'hours');
-				dateStr = dateEnd.toISOString();
-				$("#end_time").val(dateStr);
-				alert('Clicked on: ' + dateStr );
-				$('#newEvForm').show();
-				
-				//php communication
-				//sendData(moment);
-			}
-			//document.location.href = 'daycal.php?q='+dateSend;
-			//sendData(moment);
-		},
-		
-		eventResizeStart: function( event, jsEvent, ui, view ) {
-			copyEvent = {id:event.id, title:event.title, start:event.start,end:event.end, color:event.color};
-	
-		},
-		
-		eventResizeStop: function( event, jsEvent, ui, view ) {
-			//alert('Clicked on: ' + date.format("DD/MM/YYYY"));
-			currentEvent = event;
-			$('#editEvForm').show();
-		},
-		
-		eventDragStart: function( event, jsEvent, ui, view ) {
-			copyEvent = {id:event.id, title:event.title, start:event.start,end:event.end, color:event.color};
-	
-		},
-		
-		eventDrop: function( event, jsEvent, ui, view ) {
-			currentEvent = event;
-			var id = event.id;
-			$('#editEvForm').show();
-		},
-		
-		events: 'events.php'
-		/*[
-		
-			{
-				title  : 'event 1',
-				start  : '2015-07-06'
-			},
-			{
-				title  : 'event 2',
-				start  : '2015-07-11T12:00:00',
-				end  : '2015-07-11T13:00:00',
-				allDay : false // will make the time show
-			},
-			{
-				title  : 'event 3',
-				start  : '2015-07-11T12:00:00',
-				end  : '2015-07-11T13:00:00',
-				allDay : false, // will make the time show
-				color: '#f0ad4e',
-				borderColor: '#eea236',
-				className: 'PEDRITO',
-				editable: true,
-				startEditable: true,
-				surationEditable:true
-			}
-			
-		]		*/
-		
-		
-	});
-	
-	$("#submit").on('click', function(){
-			//alert('button clicked');
-			check_form('newEvForm', 'newEvF');
-		}
-    );
-
-});
-
-</script>
-
-<?php include ('fixed-nav.php') ?>
-<title>NTC Calendar</title>
-</head>
+?>
 <body>
+	<?php if(isset($cal) && $cal): ?>
 	<div id="wrap">
 		<div id="calendar"></div>
 		<div style="clear:both"></div>
@@ -200,7 +64,71 @@ $(document).ready(function() {
 			<a href="javascript:%20check_form('editEvF')" onclick="div_hide('editEvForm')" id="submit2" type="submit">Send</a>
 		</form>
 	</div>
+	<?php endif ?>
 	<!-- FORM Ends Here -->
+	<?php if(isset($start) && $start): ?>
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">NTC Booking</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li class="active"><a href="index.php?q=start">Home</a></li>
+                  <li><a href="index.php?q=facilities">Facilities</a></li>
+                  <li><a href="signin.php">Login</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
 
+          <div class="inner cover">
+            <h1 class="cover-heading">Cover your page.</h1>
+            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+            <p class="lead">
+              <a href="#" class="btn btn-lg btn-default">Learn more</a>
+            </p>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>&copy; 2015 Copyright by <a href="http://www.fai.ie">Football Association of Ireland</a>. All Rights Reserved</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+	<?php endif ?>
+	<?php if(isset($facilities) && $facilities): ?>
+		<div class="container">
+		
+			<?php foreach( $result as $row=>$key ): ?>
+					<div class="row item">
+					<div class="col-xs-6"><img src="<?= $key['item_image_url'] ?>" /></div>
+					<div class="col-xs-6">
+						<h2><?= $key['item_name'] ?></h2>
+						<p><?= $key['item_description'] ?></p>
+						<p>
+						  <a href="index.php?q=cal" class="btn btn-lg btn-primary" href="#" role="button">Book it &raquo;</a>
+						</p>
+					</div>
+				</div>
+			<?php endforeach ?>
+		
+		<?php endif ?>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+
+
+
