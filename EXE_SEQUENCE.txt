@@ -1,0 +1,60 @@
+index.php{
+
+	//START//
+	showHead();	
+	if(logedIn){
+		if(LogedInAsAdmin){
+			showAdminMenu();
+		}
+		if(LogedInAsUser){
+			showUserMenu();
+		}
+		menu.showLogOut();
+	}
+	else{menu.showLogIn();}
+	showStartPage();
+	//FACILITIES//{
+		showFixedNavBar();
+		showFacilities(){
+			showFacilitiesPage();
+			checkAvailability(item_id){
+				if(LogedInAsAdmin){
+					showMonthCalendarEDIT();
+					case: pickDay, clickDayButton{
+						showDayCalendarEDIT();	
+					}
+					case: clickWeekButton{
+						showWeekCalendarEDIT();	
+					}
+					case: clickMonthButton{
+						showMonthCalendarEDIT();	
+					}
+				}
+				
+				else{
+					showMonthCalendarNOEDIT();
+					case: pickDay, clickDayButton{
+						showDayCalendarNOEDIT();	
+					}
+					case: clickWeekButton{
+						showWeekCalendarNOEDIT();	
+					}
+					case: clickMonthButton{
+						showMonthCalendarNOEDIT();	
+					}
+				}
+			}
+		}
+	}
+	
+	//LOGIN//{
+		showFixedNavBar();
+		showLogin();
+	}
+	
+	//HOME//{
+		showFixedNavBar();
+		showStartPage();
+	}
+}
+	

@@ -1,11 +1,14 @@
 <?php include ('head.php') ?>
+<!-- FULLCALENDAR LINKS -->
 <link href="fullcalendar/fullcalendar.css" rel="stylesheet">
 <link href="css/fullcalendar-ext.css" rel="stylesheet">
+<!-- POPUPFORM LINKS -->
 <link href="css/form.css" rel="stylesheet">
-
-<script src="fullcalendar/moment.min.js"></script>
-<script src="fullcalendar/jquery.min.js"></script>
+<!-- jQuery SCRIPTS -->
+<script src="js/jquery.min.js"></script>
 <script src="fullcalendar/jquery-ui.custom.min.js"></script>
+<!-- FULLCALENDAR SRIPTS -->
+<script src="fullcalendar/moment.min.js"></script>
 <script src="fullcalendar/fullcalendar.min.js"></script>
 <!-- POPOUP SCRIPT -->
 <script src="js/form.js" type="text/javascript"></script>
