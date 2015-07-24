@@ -43,7 +43,7 @@
 	<?php endif ?>
 	<?php if(isset($GLOBALS['facilities']) &&$GLOBALS['facilities']): ?>
 		<!-- Custom styles for this template -->
-    <link href="css/navbar-fixed-top.css" rel="stylesheet">
+		<link href="css/navbar-fixed-top.css" rel="stylesheet">
 	<?php endif ?>
 	
 	<title>NTC Booking</title>

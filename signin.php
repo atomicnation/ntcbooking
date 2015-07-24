@@ -1,5 +1,5 @@
 <?php include ('head.php') ?>
-
+	<script src="js/jquery.min.js"></script>
 	<!-- Custom styles for this template -->
     <link href="css/signin.css" rel="stylesheet">
 

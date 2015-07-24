@@ -1,0 +1,16 @@
+1 - View Own Calendars/Bookings					Registered User, Admin, SuperAdmin
+2 - View General Calendars/Bookings				Anonnymous, Registered User, Admin, SuperAdmin
+3 - View Other's Calendars/Bookings				Admin, SuperAdmin
+4 - Create Own Bookings							Registered User, Admin, SuperAdmin
+5 - Create Other's Bookings						Admin, SuperAdmin
+6 - Edit Own Bookings							Registered User, Admin, SuperAdmin			--> Only 24h Before
+7 - Edit Other's Bookings						Admin, SuperAdmin									
+8 - Add new Facilities							Admin, SuperAdmin
+9 - Edit Facilities								Admin, SuperAdmin
+10 - Delete Facilities							SuperAdmin
+11 - Add New Users								Anonnymous, Admin, SuperAdmin
+12 - Delete Users								SuperAdmin									--> Admin can only  Disable
+13 - Edit Own User Settings						Registered User, Admin, SuperAdmin
+14 - Edit Other's User Settings					Admin, SuperAdmin
+15 - Edit User's Permissions					Admin, SuperAdmin
+16 - Edit Admin's Permissions					SuperAdmin

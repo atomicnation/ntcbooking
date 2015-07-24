@@ -5,17 +5,11 @@
  *************************************************************************************/
 
 //var usrType = '@Session["usrType"]';
-var usId = "0";
-var usrType = "anon";
+var usrType = "reg";
 var launchRev = false;
 var copyEvent;
 var currentEvent;
 var oldEnd;
-var res;
-if(usId == "0"){
-	res = "events.php";		
-}
-else{res == "xxxxxx.php";}
 $(document).ready(function() {
 	/* initialize the external events
 	-----------------------------------------------------------------*/
@@ -37,8 +31,7 @@ $(document).ready(function() {
 	
 	//OPTIONS------------------------------------------------------------//
 	var options =
-	{
-	/***** options for all users *****/
+	{		
 		//Define time format
 		timeFormat: 'HH:mm',
 		//Define header settings
@@ -60,7 +53,7 @@ $(document).ready(function() {
 		
 		editable: true,
 		droppable: true, // this allows things to be dropped onto the calendar		
-	
+		
 		//CALLBACKS----------------------------------------------------//
 		//Event when clicking over a day
 		dayClick: function(date, jsEvent, month) {
@@ -116,9 +109,7 @@ $(document).ready(function() {
 			$('#editEvForm').show();
 		},
 		
-		eventSources: res
-		
-		//events: 'events.php'
+		events: 'events.php'
 		/*[		
 			{
 				title  : 'event 1',

@@ -5,17 +5,11 @@
  *************************************************************************************/
 
 //var usrType = '@Session["usrType"]';
-var usId = "0";
-var usrType = "anon";
+var usrType = "adm";
 var launchRev = false;
 var copyEvent;
 var currentEvent;
 var oldEnd;
-var res;
-if(usId == "0"){
-	res = "events.php";		
-}
-else{res == "xxxxxx.php";}
 $(document).ready(function() {
 	/* initialize the external events
 	-----------------------------------------------------------------*/
@@ -34,11 +28,9 @@ $(document).ready(function() {
 	});
 	/* initialize the calendar
 		-----------------------------------------------------------------*/
-	
-	//OPTIONS------------------------------------------------------------//
-	var options =
-	{
-	/***** options for all users *****/
+
+	$('#calendar').fullCalendar({
+		//OPTIONS------------------------------------------
 		//Define time format
 		timeFormat: 'HH:mm',
 		//Define header settings
@@ -57,11 +49,13 @@ $(document).ready(function() {
 		firstDay: 1,
 		//Events settings
 		defaultTimedEventDuration: '01:00:00',//Set Event default duration in 1h
+		if(usrType == "adm"){
+			editable: true,
+			droppable: true, // this allows things to be dropped onto the calendar
+		},
 		
-		editable: true,
-		droppable: true, // this allows things to be dropped onto the calendar		
-	
-		//CALLBACKS----------------------------------------------------//
+		
+		//CALLBACKS------------------------------------------
 		//Event when clicking over a day
 		dayClick: function(date, jsEvent, month) {
 			//Get the actual view of the calendar
@@ -77,18 +71,15 @@ $(document).ready(function() {
 			}
 			if (view.name == 'agendaDay') {
 				//alert('Clicked on: ' + date.format("DD/MM/YYYY"));
-				if((usrType == "adm") || (usrType == "reg")){
-					$("#start_time").val(dateStr);
-					dateEnd = date.add(1, 'hours');
-					dateStr = dateEnd.toISOString();
-					$("#end_time").val(dateStr);
-					alert('Clicked on: ' + dateStr );
-					$('#newEvForm').show();
-					
-					//php communication
-					//sendData(moment);
-				}
+				$("#start_time").val(dateStr);
+				dateEnd = date.add(1, 'hours');
+				dateStr = dateEnd.toISOString();
+				$("#end_time").val(dateStr);
+				alert('Clicked on: ' + dateStr );
+				$('#newEvForm').show();
 				
+				//php communication
+				//sendData(moment);
 			}
 			//document.location.href = 'daycal.php?q='+dateSend;
 			//sendData(moment);
@@ -116,10 +107,9 @@ $(document).ready(function() {
 			$('#editEvForm').show();
 		},
 		
-		eventSources: res
+		events: 'events.php'
+		/*[
 		
-		//events: 'events.php'
-		/*[		
 			{
 				title  : 'event 1',
 				start  : '2015-07-06'
@@ -143,21 +133,10 @@ $(document).ready(function() {
 				surationEditable:true
 			}
 			
-		]*/	
+		]		*/
 		
-	}
-	
-	if(usrType == "adm") {
-		$('#calendar').fullCalendar(options);
-	}
-	else if(usrType == "anon"){
-		options.editable = false;
-		$('#calendar').fullCalendar(options);
-	}
-	else{
-		options.editable = false;
-		$('#calendar').fullCalendar(options);
-	}
+		
+	});
 	
 	$("#submit").on('click', function(){
 			//alert('button clicked');
