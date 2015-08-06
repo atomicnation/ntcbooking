@@ -6,7 +6,7 @@
 
 //var usrType = '@Session["usrType"]';
 var usId = "0";
-var usrType = "anon";
+var usrType = "adm";
 var launchRev = false;
 var copyEvent;
 var currentEvent;

@@ -1,5 +1,5 @@
 <?php
-$start; $facilities; $cal; $form;
+$start; $facilities; $cal; $form; $login;
 if(!isset($_GET['q']) || $_GET['q'] == 'start'){ 
 	$start = true;
 }
@@ -16,7 +16,11 @@ elseif($_GET['q'] == 'facilities'){
 	$result = $connexion->selectDB($query);
 	$r = array();
 }
-
+elseif($_GET['q'] == 'login'){
+	$login = true;	
+	include ('fixed-nav.php');
+	include ('mysqlconn.php');
+}
 include ('headers.php'); 
 
 ?>
@@ -27,8 +31,7 @@ include ('headers.php');
 		<div style="clear:both"></div>
 
 	</div>
-
-	<!-- Form -->
+	<!-- New Booking Form -->
 	<div id="newEvForm" class="popupForm">
 		<form action="savebooking.php" id="newEvF" method="post" name="form">
 			<img id="close" src="img/close.png" onclick ="div_hide('newEvForm')" />
@@ -51,7 +54,7 @@ include ('headers.php');
 		</form>
 	</div>
 	<!-- FORM Ends Here -->
-	<!-- Form -->
+	<!-- Booking Edit Form -->
 	<div id="editEvForm" class="popupForm">
 		<form action="savebooking.php" id="editEvF" method="post" name="form">
 			<img id="close" src="img/close.png" onclick ="div_hide('editEvForm')" />
@@ -77,7 +80,7 @@ include ('headers.php');
                 <ul class="nav masthead-nav">
                   <li class="active"><a href="index.php?q=start">Home</a></li>
                   <li><a href="index.php?q=facilities">Facilities</a></li>
-                  <li><a href="signin.php">Login</a></li>
+                  <li><a href="index.php?q=login"">Login</a></li>
                 </ul>
               </nav>
             </div>
@@ -104,23 +107,39 @@ include ('headers.php');
     </div>
 	<?php endif ?>
 	<?php if(isset($facilities) && $facilities): ?>
-		<div class="container">
-		
-			<?php foreach( $result as $row=>$key ): ?>
-					<div class="row item">
-					<div class="col-xs-6"><img src="<?= $key['item_image_url'] ?>" /></div>
-					<div class="col-xs-6">
-						<h2><?= $key['item_name'] ?></h2>
-						<p><?= $key['item_description'] ?></p>
-						<p>
-						  <a href="index.php?q=cal" class="btn btn-lg btn-primary" href="#" role="button">Book it &raquo;</a>
-						</p>
-					</div>
-				</div>
-			<?php endforeach ?>
-		
-		<?php endif ?>
-
+	<div class="container">	
+		<?php foreach( $result as $row=>$key ): ?>
+		<div class="row item">
+			<div class="col-xs-6"><img src="<?= $key['item_image_url'] ?>" /></div>
+			<div class="col-xs-6">
+				<h2><?= $key['item_name'] ?></h2>
+				<p><?= $key['item_description'] ?></p>
+				<p>
+				  <a href="index.php?q=cal" class="btn btn-lg btn-primary" href="#" role="button">Book it &raquo;</a>
+				</p>
+			</div>
+		</div>
+		<?php endforeach ?>
+	</div>
+	<?php endif ?>
+	<?php if(isset($login) && $login): ?>
+	<div class="container">
+      <form class="form-signin" action="auth.php" method="post">
+        <h2 class="form-signin-heading">Please log in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input name="pwd" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+    </div> <!-- /container -->
+	<?php endif ?>	
+	
 	<?php include 'foot-scp.php'; ?>
 </body>
 </html>

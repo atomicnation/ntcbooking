@@ -32,20 +32,7 @@ class mySqlX{
 	public function selectDB($query){
 		$this->connectDB();
 		$conn = $this->myconn;
-		$result = $conn->query($query);
-		if($result->num_rows <= 0){
-			echo "0 results";
-		}
-		else {
-			// output data of each row
-			/*print keys and values of the SELECT query
-			foreach( $result as $key ){
-				foreach( $key as $k=>$value ){
-					echo "<b>Key:</b> $k - <b>Value:</b> $value || ";
-				}
-				echo "<br>";
-			}
-			*/
+		if($result = $conn->query($query)){
 			return $result;			
 		}
 		$conn->close();		
