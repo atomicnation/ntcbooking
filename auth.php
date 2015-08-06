@@ -17,7 +17,9 @@
 			$_SESSION['role'] = $u['role_id'];
 			header("Location:index.php?q=login");
 		}
-		else{echo "USUARIO O PASSWORD INCORRECTOS";}
+		else{
+			echo "USUARIO O PASSWORD INCORRECTOS";
+		}
 	}
 	else {echo "DEBE RELLENAR TODOS LOS CAMPOS";}
 
